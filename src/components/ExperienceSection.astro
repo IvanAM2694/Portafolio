@@ -1,0 +1,153 @@
+---
+import { userData } from "../data/userData";
+
+// Función helper para formatear fechas
+function formatDate(dateStr: string): string {
+  if (dateStr === "Presente") return "Presente";
+  const [year, month] = dateStr.split("-");
+  const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+  if (month) {
+    return `${months[parseInt(month) - 1]} ${year}`;
+  }
+  return year;
+}
+
+// Función helper para calcular duración
+function calculateDuration(startDate: string, endDate: string): string {
+  if (endDate === "Presente") {
+    const start = new Date(startDate + "-01");
+    const now = new Date();
+    const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+    if (years > 0 && remainingMonths > 0) {
+      return `${years} año${years > 1 ? "s" : ""} ${remainingMonths} mes${remainingMonths > 1 ? "es" : ""}`;
+    } else if (years > 0) {
+      return `${years} año${years > 1 ? "s" : ""}`;
+    }
+    return `${remainingMonths} mes${remainingMonths > 1 ? "es" : ""}`;
+  }
+  
+  const start = new Date(startDate + "-01");
+  const end = new Date(endDate + "-01");
+  const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  
+  if (years > 0 && remainingMonths > 0) {
+    return `${years} año${years > 1 ? "s" : ""} ${remainingMonths} mes${remainingMonths > 1 ? "es" : ""}`;
+  } else if (years > 0) {
+    return `${years} año${years > 1 ? "s" : ""}`;
+  }
+  return `${remainingMonths} mes${remainingMonths > 1 ? "es" : ""}`;
+}
+---
+
+<section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+      <span class="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+        Experiencia Laboral
+      </span>
+    </h2>
+    
+    <!-- Timeline Container -->
+    <div class="relative">
+      <!-- Vertical Line (Desktop) -->
+      <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-blue-500"></div>
+      
+      <!-- Vertical Line (Mobile) -->
+      <div class="md:hidden absolute left-4 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-blue-500"></div>
+      
+      <!-- Timeline Items -->
+      <div class="space-y-12 md:space-y-16">
+        {userData.experience.map((exp, index) => {
+          const isEven = index % 2 === 0;
+          const isLast = index === userData.experience.length - 1;
+          const duration = calculateDuration(exp.startDate, exp.endDate);
+          
+          return (
+            <div 
+              class={`relative flex items-start md:items-center ${
+                isEven ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
+              style={`animation-delay: ${index * 0.15}s`}
+            >
+              <!-- Timeline Dot -->
+              <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-gray-950 z-10 shadow-lg shadow-blue-500/50">
+                {isLast && exp.endDate === "Presente" && (
+                  <div class="absolute inset-0 bg-blue-500 rounded-full animate-ping"></div>
+                )}
+              </div>
+              
+              <!-- Content Card -->
+              <div 
+                class={`w-full md:w-5/12 ml-12 md:ml-0 ${
+                  isEven ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
+                }`}
+              >
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-blue-500/20 group">
+                  <!-- Date Badge -->
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-medium border border-blue-500/30">
+                      {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                    </span>
+                    <span class="text-gray-400 text-xs">
+                      ({duration})
+                    </span>
+                  </div>
+                  
+                  <!-- Position & Company -->
+                  <h3 class="text-xl font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
+                    {exp.position}
+                  </h3>
+                  <div class="flex items-center gap-2 mb-3">
+                    <p class="text-blue-400 font-medium">{exp.company}</p>
+                    {exp.location && (
+                      <>
+                        <span class="text-gray-600">•</span>
+                        <p class="text-gray-400 text-sm">{exp.location}</p>
+                      </>
+                    )}
+                  </div>
+                  
+                  <!-- Description -->
+                  <p class="text-gray-300 mb-4 leading-relaxed">{exp.description}</p>
+                  
+                  <!-- Technologies -->
+                  {exp.technologies && exp.technologies.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mt-4">
+                      {exp.technologies.map((tech) => (
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .relative > div {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>

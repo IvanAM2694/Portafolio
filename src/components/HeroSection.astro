@@ -1,0 +1,58 @@
+---
+import { userData } from "../data/userData";
+---
+
+<section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto text-center animate-fade-in">
+    <div class="mb-8 animate-float">
+      <img 
+        src={userData.avatar} 
+        alt={`Foto de ${userData.name}`}
+        class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full border-4 border-blue-500 shadow-lg shadow-blue-500/50"
+      />
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent animate-slide-up">
+      {userData.name}
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-6 animate-slide-up">
+      {userData.role}
+    </p>
+    <div class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 animate-slide-up space-y-2">
+      {userData.bio.split('\n').map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
+      <a 
+        href={userData.linkedIn}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/50"
+      >
+        LinkedIn
+      </a>
+      <a 
+        href={userData.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-all transform hover:scale-105 border border-gray-700"
+      >
+        GitHub
+      </a>
+      <a 
+        href="#contact"
+        class="px-6 py-3 bg-transparent hover:bg-gray-800 text-white rounded-lg transition-all transform hover:scale-105 border border-gray-700"
+      >
+        Contacto
+      </a>
+    </div>
+    <div class="mt-12 animate-slide-up">
+      <a href="#experience" class="inline-block animate-bounce">
+        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+

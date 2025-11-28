@@ -1,0 +1,40 @@
+---
+import { userData } from "../data/userData";
+
+const techIcons: Record<string, string> = {
+  "JavaScript": "📜",
+  "TypeScript": "📘",
+  "React": "⚛️",
+  "Node.js": "🟢",
+  "C#": "🔷",
+  ".NET": "🔷",
+  "Astro": "✨",
+  "TailwindCSS": "🎨",
+  "Git": "📦",
+  "SQL": "🗄️",
+};
+---
+
+<section id="technologies" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+      <span class="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+        Tecnologías
+      </span>
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      {userData.technologies.map((tech, index) => (
+        <div 
+          class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-all transform hover:scale-110 hover:rotate-1 shadow-lg hover:shadow-blue-500/20 text-center group cursor-pointer"
+          style={`animation-delay: ${index * 0.05}s`}
+        >
+          <div class="text-4xl mb-3 group-hover:scale-125 transition-transform">
+            {techIcons[tech] || "💻"}
+          </div>
+          <h3 class="text-white font-semibold">{tech}</h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
