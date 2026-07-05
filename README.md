@@ -1,81 +1,87 @@
-# Portafolio Personal - Iván Aguilar
+# Portafolio Personal - Iván Aguilar (Ivam DEV)
 
 Landing page de portafolio personal construida con Astro y TailwindCSS.
 
-## 🚀 Características
+## Características
 
-- **Diseño Moderno**: Interfaz elegante con efectos glassmorphism y animaciones suaves
-- **Totalmente Responsivo**: Optimizado para todos los dispositivos
-- **Performance**: Construido con Astro para máxima velocidad
-- **Componentes Modulares**: Arquitectura limpia y mantenible
+- Diseño moderno con efectos glassmorphism y animaciones suaves
+- Totalmente responsivo
+- Performance optimizada con Astro SSG
+- Componentes modulares
 
-## 🛠️ Tecnologías
+## Tecnologías
 
-- [Astro](https://astro.build/) - Framework web moderno
-- [TailwindCSS](https://tailwindcss.com/) - Framework CSS utility-first
-- [TypeScript](https://www.typescriptlang.org/) - Tipado estático
+- [Astro](https://astro.build/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-## 📦 Instalación
+## Instalación
 
 ```bash
 npm install
 ```
 
-## 🏃 Desarrollo
+## Desarrollo
 
 ```bash
 npm run dev
 ```
 
-El sitio estará disponible en `http://localhost:4321`
+Local: http://localhost:4321/Portafolio (base path UAT por defecto)
 
-## 🏗️ Build
+## Build por entorno
+
+| Comando | Entorno | Site | Base |
+|---------|---------|------|------|
+| `npm run build:uat` | UAT / local | github.io | `/Portafolio` |
+| `npm run build:prod` | Producción | ivamlabs.com | `/` |
+
+Preview:
 
 ```bash
-npm run build
+npm run preview:uat
+npm run preview:prod
 ```
 
-## 📁 Estructura del Proyecto
+## Despliegue
+
+| Entorno | Rama | URL | Método |
+|---------|------|-----|--------|
+| UAT | `develop` | https://ivanam2694.github.io/Portafolio/ | Automático (GitHub Actions) |
+| Producción | `main` | https://ivamlabs.com | Manual (VPS) |
+
+Detalle operativo: [`deploy.md`](deploy.md)
+
+**UAT:** push a `develop` dispara `.github/workflows/deploy-uat.yml`.
+
+**Prod:** tras merge a `main`:
+
+```powershell
+python .vps/runners/deploy-prod.py
+```
+
+## Estructura del proyecto
 
 ```
 /
 ├── public/
-│   └── assets/
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.astro
-│   │   ├── HeroSection.astro
-│   │   ├── ExperienceSection.astro
-│   │   ├── TechStackSection.astro
-│   │   ├── ProjectsSection.astro
-│   │   ├── ContactSection.astro
-│   │   └── Footer.astro
 │   ├── layouts/
-│   │   └── MainLayout.astro
 │   ├── data/
-│   │   └── userData.ts
 │   ├── pages/
-│   │   └── index.astro
 │   └── styles/
-│       └── base.css
+├── .github/workflows/
+│   └── deploy-uat.yml
 ├── astro.config.mjs
-├── tailwind.config.mjs
+├── deploy.md
 └── package.json
 ```
 
-## 📝 Personalización
+## Personalización
 
-Edita `src/data/userData.ts` para actualizar tu información personal, proyectos y experiencia.
+Edita `src/data/userData.ts` para actualizar información personal, proyectos y experiencia.
 
-## 🌐 Despliegue
-
-Este proyecto puede ser desplegado en:
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-
-## 📄 Licencia
+## Licencia
 
 MIT
-
-

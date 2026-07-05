@@ -22,3 +22,8 @@ pnpm-debug.log*
 .vscode/
 .idea/
 .cursor/
+.codegraph/
+.agents/
+.claude/
+.engram/
+.vps/

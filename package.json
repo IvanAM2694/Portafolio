@@ -6,7 +6,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:uat": "astro build",
+    "build:prod": "cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro build",
     "preview": "astro preview",
+    "preview:uat": "astro preview --base /Portafolio",
+    "preview:prod": "cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro preview",
     "astro": "astro"
   },
   "dependencies": {
@@ -17,6 +21,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
