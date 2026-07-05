@@ -38,24 +38,18 @@ npm run preview:uat
 
 ## Producción — VPS (manual)
 
+El build **siempre se ejecuta en tu PC**. El VPS solo recibe la carpeta `dist/` y Nginx la sirve.
+
+| Paso | Qué hace | Dónde |
+|------|----------|-------|
+| 1 | Configurar Nginx + carpeta del proyecto (`/var/www/portafolio-prod`) | VPS |
+| 2 | Subir `dist/` (build local) a esa carpeta | PC → VPS |
+
 **Requisitos:** Python 3, `paramiko` (`pip install paramiko`), Node.js, acceso SSH al VPS.
 
-### Bootstrap inicial (una sola vez)
+### Deploy completo (pasos 1 + 2)
 
-```powershell
-cd D:\IvanAguilar\Repositorios\Portafolio
-
-# Replicar credenciales SSH del workspace
-python .vps/runners/sync-access.py
-
-# Primer deploy (build + artefactos + nginx)
-python .vps/runners/deploy-prod.py
-
-# HTTPS con certbot
-python .vps/runners/configure-https.py --profile prod
-```
-
-### Deploy de cada release
+Desde raíz Portafolio, rama `main` actualizada:
 
 ```powershell
 git checkout main
@@ -63,15 +57,19 @@ git pull origin main
 python .vps/runners/deploy-prod.py
 ```
 
-Opciones:
+Esto ejecuta en local `npm run build:prod` y luego los dos pasos en el VPS.
 
-- `--skip-build` — sube `dist/` existente sin recompilar
-
-**Build local prod:**
+### Por pasos
 
 ```powershell
+# Build en local (PC)
 npm run build:prod
-npm run preview:prod
+
+# Paso 1: nginx + carpeta /var/www/portafolio-prod
+python .vps/runners/deploy-prod.py --setup-only
+
+# Paso 2: subir dist/ a la carpeta del proyecto
+python .vps/runners/deploy-prod.py --artifacts-only --skip-build
 ```
 
 ### DNS (registrador ivamlabs.com)
