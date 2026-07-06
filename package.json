@@ -6,28 +6,28 @@
     "node": ">=24.18.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run og:generate && astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "build:uat": "astro build",
-    "build:prod": "cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro build",
+    "og:generate": "node scripts/generate-og.mjs",
+    "build": "npm run og:generate && astro build",
+    "build:uat": "npm run og:generate && astro build",
+    "build:prod": "npm run og:generate && cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro build",
     "preview": "astro preview",
     "preview:uat": "astro preview --base /Portafolio",
     "preview:prod": "cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.15.0",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/react": "^3.6.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@fontsource/outfit": "^5.2.8",
+    "@fontsource/source-sans-3": "^5.2.9",
+    "astro": "^4.15.0",
+    "simple-icons": "^16.25.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "@types/node": "^24.0.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
+    "cross-env": "^7.0.3",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.5.0"
   }
