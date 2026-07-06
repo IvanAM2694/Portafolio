@@ -27,3 +27,12 @@ pnpm-debug.log*
 .claude/
 .engram/
 .vps/
+# --- repositorios-sync (agentes: skills/docs locales) ---
+/.agents
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+/gemini.md
+/.github/copilot-instructions.md
+skills-lock.json
+.agents/.sync-state.json
