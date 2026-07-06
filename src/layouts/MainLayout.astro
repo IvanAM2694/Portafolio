@@ -1,11 +1,35 @@
 ---
+import JsonLd from "../components/JsonLd.astro";
+import "../styles/fonts.css";
 import "../styles/base.css";
+import { userData } from "../data/userData";
+import { getAvatarOgImage } from "../utils/avatar";
+import { getOgSocialImage } from "../utils/ogImage";
+import { publicAsset } from "../utils/publicAsset";
+import { isProdBuild, prodCanonical, PROD_SITE } from "../utils/siteEnv";
 
 interface Props {
   title?: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title = "Portfolio — Iván Aguilar" } = Astro.props;
+const defaultTitle = `${userData.name} — Ingeniero de Software | ${userData.brandName}`;
+const defaultDescription = `Portafolio de ${userData.name} (${userData.brandName}): ${userData.role} con más de 7 años de experiencia en .NET, React, Laravel y Azure. ${userData.location}.`;
+
+const siteHref = Astro.site?.href ?? `${PROD_SITE}/`;
+const personImage = await getAvatarOgImage(siteHref);
+const defaultOgImage = await getOgSocialImage(siteHref);
+
+const {
+  title = defaultTitle,
+  description = defaultDescription,
+  ogImage = defaultOgImage,
+} = Astro.props;
+
+const canonical = prodCanonical("/");
+const robots = isProdBuild ? "index, follow" : "noindex, follow";
+const ogUrl = canonical;
 ---
 
 <!doctype html>
@@ -13,21 +37,39 @@ const { title = "Portfolio — Iván Aguilar" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portafolio personal de Iván Aguilar - Software Engineer" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={userData.name} />
+    <meta name="theme-color" content="#0b0f14" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={publicAsset("/favicon.svg")} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${userData.name} — ${userData.brandName}`} />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content={userData.brandName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <title>{title}</title>
+    <JsonLd personImage={personImage} />
   </head>
-  <body class="bg-gray-950 text-white antialiased">
+  <body>
+    <a
+      href="#home"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-ivam-accent focus:text-white focus:rounded-lg"
+    >
+      Saltar al contenido
+    </a>
     <slot />
   </body>
 </html>
-
-<style is:global>
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-  }
-</style>

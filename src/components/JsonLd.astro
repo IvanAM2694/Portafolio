@@ -1,0 +1,43 @@
+---
+import { userData } from "../data/userData";
+import { PROD_SITE } from "../utils/siteEnv";
+
+interface Props {
+  personImage: string;
+}
+
+const { personImage } = Astro.props;
+
+const siteUrl = Astro.site?.href ?? `${PROD_SITE}/`;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: userData.name,
+  alternateName: userData.brandName,
+  jobTitle: userData.role,
+  url: PROD_SITE,
+  image: personImage,
+  sameAs: [userData.linkedIn, userData.github],
+  knowsAbout: userData.technologies,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: userData.location,
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: userData.brandName,
+  alternateName: `${userData.name} — Portafolio`,
+  url: siteUrl,
+  author: {
+    "@type": "Person",
+    name: userData.name,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
