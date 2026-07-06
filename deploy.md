@@ -96,7 +96,7 @@ Requisitos: Python 3, `paramiko`, acceso SSH local.
 | App root | `/var/www/portafolio-prod` |
 | Nginx site | `portafolio-prod` |
 | Dominio | `ivamlabs.com` |
-| Config nginx | `.vps/environments/portafolio-prod/nginx.conf` |
+| Config nginx | `deploy/nginx/portafolio-prod-ssl.conf` (HTTPS + cache) → `.vps/environments/portafolio-prod/nginx.conf` |
 
 Logs locales: `.vps/logs/deploy-prod-prod.log`
 
@@ -120,3 +120,5 @@ Logs locales: `.vps/logs/deploy-prod-prod.log`
 | Fecha | Entorno | Acción | Notas |
 |-------|---------|--------|-------|
 | 2026-07-06 | prod | CI GitHub Actions + rsync SSH | Reemplaza deploy manual habitual |
+| 2026-07-06 | prod | Fase 2 performance | Avatar local + Astro Image; plantilla Nginx cache `deploy/nginx/` |
+| 2026-07-06 | prod | Nginx cache aplicado | `deploy-prod.py --setup-only`; HTTPS OK; headers verificados |
