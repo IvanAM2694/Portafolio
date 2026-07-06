@@ -36,3 +36,9 @@ pnpm-debug.log*
 /.github/copilot-instructions.md
 skills-lock.json
 .agents/.sync-state.json
+
+# Astro local (types.d.ts sí se versiona)
+.astro/settings.json
+
+# OG generado en build (scripts/generate-og.mjs)
+src/assets/og-social.jpg
