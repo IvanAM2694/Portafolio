@@ -36,29 +36,28 @@ Local: http://localhost:4321/Portafolio (base path UAT por defecto)
 | `npm run build:uat` | UAT / local | github.io | `/Portafolio` |
 | `npm run build:prod` | Producción | ivamlabs.com | `/` |
 
-Preview:
+Preview local:
 
 ```bash
 npm run preview:uat
 npm run preview:prod
 ```
 
+En producción el build de `main` corre en **GitHub Actions**, no en local ni en el VPS.
+
 ## Despliegue
 
-| Entorno | Rama | URL | Método |
-|---------|------|-----|--------|
-| UAT | `develop` | https://ivanam2694.github.io/Portafolio/ | Automático (GitHub Actions) |
-| Producción | `main` | https://ivamlabs.com | Manual (VPS) |
+| Entorno | Rama | URL | Build | Deploy |
+|---------|------|-----|-------|--------|
+| UAT | `develop` | https://ivanam2694.github.io/Portafolio/ | GitHub Actions | GitHub Pages |
+| Producción | `main` | https://ivamlabs.com | GitHub Actions | VPS (rsync SSH) |
 
-Detalle operativo: [`deploy.md`](deploy.md)
+Detalle operativo, secrets y checklist: [`deploy.md`](deploy.md)
 
-**UAT:** push a `develop` dispara `.github/workflows/deploy-uat.yml`.
+**Workflows:**
 
-**Prod:** tras merge a `main`:
-
-```powershell
-python .vps/runners/deploy-prod.py
-```
+- UAT: `.github/workflows/deploy-uat.yml` (push `develop`)
+- Prod: `.github/workflows/deploy-prod.yml` (push `main`)
 
 ## Estructura del proyecto
 
@@ -72,7 +71,8 @@ python .vps/runners/deploy-prod.py
 │   ├── pages/
 │   └── styles/
 ├── .github/workflows/
-│   └── deploy-uat.yml
+│   ├── deploy-uat.yml
+│   └── deploy-prod.yml
 ├── astro.config.mjs
 ├── deploy.md
 └── package.json
