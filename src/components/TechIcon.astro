@@ -1,0 +1,27 @@
+---
+import { getTechIcon } from "../utils/techIcons";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const icon = getTechIcon(name);
+---
+
+{icon ? (
+  <svg
+    role="img"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-10 h-10 mx-auto"
+    aria-label={icon.title}
+  >
+    <title>{icon.title}</title>
+    <path d={icon.path} fill={`#${icon.hex}`} />
+  </svg>
+) : (
+  <span class="w-10 h-10 mx-auto flex items-center justify-center text-ivam-muted text-sm font-semibold" aria-hidden="true">
+    ?
+  </span>
+)}

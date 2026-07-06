@@ -1,47 +1,139 @@
 ---
 import { userData } from "../data/userData";
+import { navSections } from "../data/navSections";
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-ivam-bg/80 backdrop-blur-md border-b border-ivam-border" aria-label="Principal">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <a href="#home" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">
-        {userData.name}
+      <a href="#home" data-nav-link="#home" class="nav-link text-lg sm:text-xl font-bold font-heading text-white hover:text-ivam-accent transition-colors">
+        {userData.brandName}
       </a>
-      <div class="hidden md:flex space-x-8">
-        <a href="#home" class="text-gray-300 hover:text-white transition-colors">Inicio</a>
-        <a href="#experience" class="text-gray-300 hover:text-white transition-colors">Experiencia</a>
-        <a href="#technologies" class="text-gray-300 hover:text-white transition-colors">Tecnologías</a>
-        <a href="#projects" class="text-gray-300 hover:text-white transition-colors">Proyectos</a>
-        <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contacto</a>
+      <div class="hidden md:flex space-x-6 lg:space-x-8">
+        {navSections.map(({ id, label }) => (
+          <a
+            href={`#${id}`}
+            data-nav-link={`#${id}`}
+            class="nav-link text-ivam-muted hover:text-white transition-colors py-2 relative"
+          >
+            {label}
+          </a>
+        ))}
       </div>
       <div class="md:hidden">
-        <button id="mobile-menu-button" class="text-gray-300 hover:text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex items-center justify-center min-h-[48px] min-w-[48px] text-ivam-muted hover:text-white"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
-    <div class="px-4 py-4 space-y-4">
-      <a href="#home" class="block text-gray-300 hover:text-white transition-colors">Inicio</a>
-      <a href="#experience" class="block text-gray-300 hover:text-white transition-colors">Experiencia</a>
-      <a href="#technologies" class="block text-gray-300 hover:text-white transition-colors">Tecnologías</a>
-      <a href="#projects" class="block text-gray-300 hover:text-white transition-colors">Proyectos</a>
-      <a href="#contact" class="block text-gray-300 hover:text-white transition-colors">Contacto</a>
+  <div id="mobile-menu" class="hidden md:hidden bg-ivam-surface border-t border-ivam-border">
+    <div class="px-4 py-2 space-y-1">
+      {navSections.map(({ id, label }) => (
+        <a
+          href={`#${id}`}
+          data-nav-link={`#${id}`}
+          class="nav-mobile-link nav-link block py-3 px-2 text-ivam-muted hover:text-white transition-colors"
+        >
+          {label}
+        </a>
+      ))}
     </div>
   </div>
 </nav>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
+  import { navSectionIds } from "../data/navSections";
+
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = document.querySelectorAll(".nav-mobile-link");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.add("hidden");
+    mobileMenuButton?.setAttribute("aria-expanded", "false");
+    mobileMenuButton?.setAttribute("aria-label", "Abrir menú de navegación");
+  }
+
   if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+    mobileMenuButton.addEventListener("click", () => {
+      const isHidden = mobileMenu.classList.toggle("hidden");
+      mobileMenuButton.setAttribute("aria-expanded", String(!isHidden));
+      mobileMenuButton.setAttribute(
+        "aria-label",
+        isHidden ? "Abrir menú de navegación" : "Cerrar menú de navegación"
+      );
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
     });
   }
+
+  function setActiveNav(hash: string) {
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute("data-nav-link") === hash;
+      link.classList.toggle("nav-link-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  const sectionElements = navSectionIds
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sectionElements.length > 0 && "IntersectionObserver" in window) {
+    let activeHash = `#${navSectionIds[0]}`;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length === 0) return;
+
+        const id = visible[0].target.id;
+        const nextHash = `#${id}`;
+        if (nextHash !== activeHash) {
+          activeHash = nextHash;
+          setActiveNav(activeHash);
+        }
+      },
+      {
+        rootMargin: "-25% 0px -55% 0px",
+        threshold: [0.1, 0.25, 0.5],
+      }
+    );
+
+    sectionElements.forEach((section) => observer.observe(section));
+    setActiveNav(activeHash);
+  }
 </script>
+
+<style>
+  .nav-link-active {
+    @apply text-ivam-accent font-semibold;
+  }
+
+  @media (min-width: 768px) {
+    .nav-link-active::after {
+      content: "";
+      @apply absolute left-0 right-0 -bottom-0.5 h-0.5 bg-ivam-accent rounded-full;
+    }
+  }
+</style>

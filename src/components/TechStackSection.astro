@@ -1,41 +1,24 @@
 ---
 import { userData } from "../data/userData";
-
-const techIcons: Record<string, string> = {
-  "JavaScript": "📜",
-  "TypeScript": "📘",
-  "React": "⚛️",
-  "Node.js": "🟢",
-  "C#": "🔷",
-  ".NET": "🔷",
-  "Astro": "✨",
-  "TailwindCSS": "🎨",
-  "Git": "📦",
-  "SQL": "🗄️",
-};
+import TechIcon from "./TechIcon.astro";
 ---
 
-<section id="technologies" class="py-20 px-4 sm:px-6 lg:px-8">
+<section id="technologies" class="scroll-mt-16 py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
-      <span class="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-        Tecnologías
-      </span>
+      <span class="text-gradient-heading">Tecnologías</span>
     </h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
       {userData.technologies.map((tech, index) => (
-        <div 
-          class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-all transform hover:scale-110 hover:rotate-1 shadow-lg hover:shadow-blue-500/20 text-center group cursor-pointer"
+        <div
+          class="card-surface p-4 sm:p-6 transform hover:scale-105 text-center group"
           style={`animation-delay: ${index * 0.05}s`}
         >
-          <div class="text-4xl mb-3 group-hover:scale-125 transition-transform">
-            {techIcons[tech] || "💻"}
+          <div class="mb-2 sm:mb-3 group-hover:scale-110 transition-transform flex justify-center">
+            <TechIcon name={tech} />
           </div>
-          <h3 class="text-white font-semibold">{tech}</h3>
-        </div>
+          <h3 class="text-white font-semibold text-sm sm:text-base leading-tight">{tech}</h3>        </div>
       ))}
     </div>
   </div>
 </section>
-
-
