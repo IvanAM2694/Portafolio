@@ -26,10 +26,8 @@
 
 ## CI — Lighthouse
 
-- **Workflow:** `.github/workflows/verify-lighthouse.yml`
-- **Trigger:** push/PR a `main`, `workflow_dispatch`
-- **Config:** `lighthouserc.cjs` (preview **prod** en `127.0.0.1:4321/` — UAT tiene `noindex` y baja el score SEO)
-- **Upload:** temporary-public-storage (reporte en logs del job)
+- **CI:** deshabilitado (workflow `verify-lighthouse.yml` eliminado — consumo de minutos sin resultados fiables).
+- **Local:** `lighthouserc.cjs` + `npm run verify:lighthouse` / `npm run verify` siguen disponibles bajo demanda.
 
 ## Verificación local
 
@@ -52,5 +50,5 @@ npm run verify:static:uat
 
 - [x] `performance-budget.md` (este documento)
 - [x] `lighthouserc.cjs` con umbrales
-- [x] Workflow `verify-lighthouse.yml`
-- [x] Script `npm run verify` / `verify:lighthouse`
+- [x] Script `npm run verify` / `verify:lighthouse` (solo local)
+- [ ] Workflow CI Lighthouse (retirado)

@@ -76,7 +76,7 @@ UAT sigue desplegándose en GitHub Pages; no compite con prod en buscadores.
 ## Fase 4 — completada
 
 - [x] Presupuesto de performance: `.sdd/specs/performance-budget.md`
-- [x] Lighthouse CI: `lighthouserc.cjs` + `.github/workflows/verify-lighthouse.yml`
+- [x] Lighthouse local: `lighthouserc.cjs` + `npm run verify:lighthouse`
 - [x] Verificación estática: `scripts/verify-static.mjs` + `npm run verify`
 
 ## Sitemap
