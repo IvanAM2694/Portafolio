@@ -92,37 +92,58 @@ import { navSections } from "../data/navSections";
     });
   }
 
-  const sectionElements = navSectionIds
-    .map((id) => document.getElementById(id))
-    .filter((el): el is HTMLElement => el !== null);
+  const NAV_OFFSET = 72;
 
-  if (sectionElements.length > 0 && "IntersectionObserver" in window) {
-    let activeHash = `#${navSectionIds[0]}`;
+  function resolveActiveHash(): string {
+    const scrollY = window.scrollY + NAV_OFFSET;
+    let activeId = navSectionIds[0];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible.length === 0) return;
-
-        const id = visible[0].target.id;
-        const nextHash = `#${id}`;
-        if (nextHash !== activeHash) {
-          activeHash = nextHash;
-          setActiveNav(activeHash);
-        }
-      },
-      {
-        rootMargin: "-25% 0px -55% 0px",
-        threshold: [0.1, 0.25, 0.5],
+    for (const id of navSectionIds) {
+      const section = document.getElementById(id);
+      if (!section) continue;
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollY) {
+        activeId = id;
       }
-    );
+    }
 
-    sectionElements.forEach((section) => observer.observe(section));
-    setActiveNav(activeHash);
+    return `#${activeId}`;
   }
+
+  function updateActiveFromScroll() {
+    setActiveNav(resolveActiveHash());
+  }
+
+  let scrollTicking = false;
+
+  function onScroll() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      updateActiveFromScroll();
+      scrollTicking = false;
+    });
+  }
+
+  function syncFromHash() {
+    const hash = location.hash;
+    if (hash && navSectionIds.some((id) => `#${id}` === hash)) {
+      setActiveNav(hash);
+      return;
+    }
+    updateActiveFromScroll();
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("hashchange", syncFromHash);
+
+  if (location.hash && navSectionIds.some((id) => `#${id}` === location.hash)) {
+    setActiveNav(location.hash);
+  } else {
+    updateActiveFromScroll();
+  }
+
+  window.addEventListener("load", updateActiveFromScroll, { once: true });
 </script>
 
 <style>

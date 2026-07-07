@@ -1,4 +1,5 @@
 ---
+import csharpIcon from "../assets/icons/csharp.svg?raw";
 import { getTechIcon } from "../utils/techIcons";
 
 interface Props {
@@ -7,9 +8,23 @@ interface Props {
 
 const { name } = Astro.props;
 const icon = getTechIcon(name);
+
+const RAW_SVG_MAP: Record<string, string> = {
+  "C#": csharpIcon,
+};
+
+const rawSvg = RAW_SVG_MAP[name];
+
+function withIconClass(svg: string): string {
+  return svg.includes('class="')
+    ? svg.replace(/class="([^"]*)"/, 'class="$1 w-10 h-10 mx-auto"')
+    : svg.replace("<svg", '<svg class="w-10 h-10 mx-auto"');
+}
 ---
 
-{icon ? (
+{rawSvg ? (
+  <Fragment set:html={withIconClass(rawSvg)} />
+) : icon ? (
   <svg
     role="img"
     viewBox="0 0 24 24"

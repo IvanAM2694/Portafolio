@@ -23,7 +23,6 @@ const SIMPLE_ICON_MAP: Record<string, SimpleIcon> = {
   TypeScript: siTypescript,
   React: siReact,
   "Node.js": siNodedotjs,
-  "C#": siDotnet,
   ".NET": siDotnet,
   PHP: siPhp,
   Laravel: siLaravel,

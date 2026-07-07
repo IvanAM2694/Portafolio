@@ -11,6 +11,7 @@ export interface TechIconData {
 }
 
 export const CUSTOM_TECH_ICONS: Record<string, TechIconData> = {
+  /** Multicolor SVG oficial: src/assets/icons/csharp.svg (Wikimedia / Microsoft) */
   Azure: {
     title: "Microsoft Azure",
     hex: "0078D4",
