@@ -56,7 +56,7 @@ UAT sigue desplegándose en GitHub Pages; no compite con prod en buscadores.
 
 ## Fase 2 — completada
 
-- [x] Avatar local en `src/assets/ivan-aguilar.jpg` (sin dependencia de GitHub CDN)
+- [x] Avatar local en `src/assets/ivan-aguilar.webp` (sin dependencia de GitHub CDN)
 - [x] `<Image>` de Astro + `sharp`: WebP, `loading="eager"`, `fetchpriority="high"`, srcset responsive
 - [x] OG / Twitter / JSON-LD usan URL absoluta del avatar optimizado (`src/utils/avatar.ts`)
 - [x] `userData.avatar` eliminado (fuente única: assets)

@@ -10,7 +10,7 @@ import sharp from "sharp";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const avatarPath = join(root, "src/assets/ivan-aguilar.jpg");
+const avatarPath = join(root, "src/assets/ivan-aguilar.webp");
 const outPath = join(root, "src/assets/og-social.jpg");
 
 const WIDTH = 1200;

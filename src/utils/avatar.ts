@@ -1,5 +1,5 @@
 import { getImage } from "astro:assets";
-import avatarSrc from "../assets/ivan-aguilar.jpg";
+import avatarSrc from "../assets/ivan-aguilar.webp";
 import { absoluteUrl, PROD_SITE } from "./siteEnv";
 
 export { avatarSrc };
