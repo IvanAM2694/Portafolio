@@ -11,35 +11,39 @@ export interface Experience {
 export interface Project {
   name: string;
   description: string;
-  link: string;
+  link?: string;
   github?: string;
   technologies: string[];
   language?: string;
 }
 
 export interface UserData {
+  brandName: string;
   name: string;
   role: string;
   bio: string;
   location: string;
   linkedIn: string;
   github: string;
-  avatar: string;
+  /** Ruta pública al CV. Colocar el archivo en public/cv-ivan-aguilar.pdf */
+  cvPath: string;
   technologies: string[];
   experience: Experience[];
   projects: Project[];
 }
 
 export const userData: UserData = {
+  brandName: "IvamDEV",
   name: "Iván Aguilar",
   role: "Software Engineer",
-  bio: "Soy un Ingeniero Informático que disfruta transformar ideas en soluciones que ayuden a las personas.\n"+
-"En estos más de 7 años, la tecnología ha sido mi lenguaje y el liderazgo mi forma de servir: escuchar, guiar y construir junto a mi equipo.\n"+
-"Sigo buscando proyectos donde pueda aportar mi experiencia, pero también seguir aprendiendo, creciendo y dejando una huella positiva en quienes trabajan conmigo.",
+  cvPath: "/cv-ivan-aguilar.pdf",
+  bio:
+    "Soy un Ingeniero Informático que disfruta transformar ideas en soluciones que ayuden a las personas.\n" +
+    "En estos más de 7 años, la tecnología ha sido mi lenguaje y el liderazgo mi forma de servir: escuchar, guiar y construir junto a mi equipo.\n" +
+    "Sigo buscando proyectos donde pueda aportar mi experiencia, pero también seguir aprendiendo, creciendo y dejando una huella positiva en quienes trabajan conmigo.",
   location: "Perú",
   linkedIn: "https://www.linkedin.com/in/ivan-hernan-aguilar-marinos-814771107",
   github: "https://github.com/IvanAM2694",
-  avatar: "https://github.com/IvanAM2694.png",
   technologies: [
     "JavaScript",
     "TypeScript",
@@ -47,19 +51,33 @@ export const userData: UserData = {
     "Node.js",
     "C#",
     ".NET",
+    "PHP",
+    "Laravel",
     "Astro",
     "TailwindCSS",
+    "PostgreSQL",
+    "SQL Server",
+    "Azure",
     "Git",
-    "SQL",
   ],
   experience: [
     {
       company: "Experis Perú",
       position: "Full Stack Developer",
-      startDate: "2024-10", 
+      startDate: "2024-10",
       endDate: "Presente",
-      description: "",
-      technologies: ["C#", "JavaScript", "TypeScript", "React", ".NET", "Postgres", "Azure", "SQL"],
+      description:
+        "Desarrollo full stack en asignación para cliente retail (RealPlaza) vía Experis. Implementación de funcionalidades en .NET y React, modelado y consultas en PostgreSQL, y despliegues en Azure. Trabajo remoto desde Trujillo en equipo ágil.",
+      technologies: [
+        "C#",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        ".NET",
+        "Postgres",
+        "Azure",
+        "SQL",
+      ],
       location: "Trujillo, Perú (Remoto)",
     },
     {
@@ -67,87 +85,55 @@ export const userData: UserData = {
       position: "Development Integration Lead",
       startDate: "2021-05",
       endDate: "2024-09",
-      description: "",
-      technologies: ["C#", ".Net", "React", "JavaScript", "OpenUI5", "SQL", "Azure", "Azure DevOps", "SAP ABAP"],
+      description:
+        "Liderazgo de integración y desarrollo en Wedox. Trabajo directo sobre BUPLAT, la plataforma producto de la empresa, con responsabilidades de liderazgo técnico, arquitectura de integraciones y evolución del stack (.NET, React, SAP).",
+      technologies: [
+        "C#",
+        ".Net",
+        "React",
+        "JavaScript",
+        "OpenUI5",
+        "SQL",
+        "Azure",
+        "Azure DevOps",
+        "SAP ABAP",
+      ],
       location: "Trujillo, Perú (Remoto)",
     },
     {
-        company: "BUPLAT",
-        position: "Product Technical Lead",
-        startDate: "2021-05",
-        endDate: "2024-09",
-        description: "",
-        technologies: ["C#", ".Net", "React", "JavaScript", "OpenUI5", "SQL", "Azure", "Azure DevOps", "SAP ABAP"],
-        location: "Trujillo, Perú (Remoto)",
+      company: "WES",
+      position: "BPM Developer",
+      startDate: "2021-03",
+      endDate: "2021-05",
+      description: "Desarrollo BPM en BIZAGI para cliente SC Johnson",
+      technologies: ["C#", ".Net", "SQL", "BPMN", "BIZAGI"],
+      location: "Trujillo, Perú (Remoto)",
     },
     {
-        company: "WES",
-        position: "BPM Developer",
-        startDate: "2021-03",
-        endDate: "2021-05",
-        description: "Desarrollo BPM en BIZAGI para cliente SC Johnson",
-        technologies: ["C#", ".Net", "SQL", "BPMN", "BIZAGI"],
-        location: "Trujillo, Perú (Remoto)",
-    },
-    {
-        company: "iDO Consulting",
-        position: "Analista de soporte y desarrollo",
-        startDate: "2020-01",
-        endDate: "2021-03",
-        description: "Soporte en SAP PI/PO, ECC y CRM para clientes en México ",
-        technologies: ["C#", ".Net", "SQL", "BPMN", "OpenUI5"],
-        location: "Trujillo, Perú (Remoto)",
+      company: "iDO Consulting",
+      position: "Analista de soporte y desarrollo",
+      startDate: "2020-01",
+      endDate: "2021-03",
+      description: "Soporte en SAP PI/PO, ECC y CRM para clientes en México ",
+      technologies: ["C#", ".Net", "SQL", "BPMN", "OpenUI5"],
+      location: "Trujillo, Perú (Remoto)",
     },
     // Agregar más experiencias según tu historial en LinkedIn...
   ],
   projects: [
     {
-        name: "VetERP",
-        description: "Sistema de gestión en consultorio veterinario. Desarrollado en Laravel y React",
-        link: "https://github.com/IvanAM2694/#",
-        github: "https://github.com/IvanAM2694/#",
-        technologies: ["PHP", "Laravel", "React", "TailwindCSS", "Typescript"],
-        language: "PHP",
+      name: "VetERP",
+      description:
+        "Sistema de gestión para consultorio veterinario. Laravel + React + TypeScript.",
+      technologies: ["PHP", "Laravel", "React", "TailwindCSS", "TypeScript"],
+      language: "PHP",
     },
     {
-        name: "Peru Ancestral",
-        description: "Sitio web de turismo y viaje ancestral en Perú, donde se podia reservar tours y hoteles. Permitia la reserva usando la pasarela de pago IzyPay. Desarrollado en Laravel y React",
-        link: "https://github.com/IvanAM2694/#",
-        github: "https://github.com/IvanAM2694/#",
-        technologies: ["PHP", "Laravel", "React", "TailwindCSS", "Typescript"],
-        language: "PHP",
-    }/*,
-    {
-      name: "OrderRange",
-      description: "Sistema de gestión de órdenes desarrollado en C#",
-      link: "https://github.com/IvanAM2694/OrderRange",
-      github: "https://github.com/IvanAM2694/OrderRange",
-      technologies: ["C#", ".NET"],
-      language: "C#",
+      name: "Peru Ancestral",
+      description:
+        "Plataforma de turismo ancestral en Perú con reserva de tours y hoteles e integración de pagos IzyPay. Laravel + React.",
+      technologies: ["PHP", "Laravel", "React", "TailwindCSS", "TypeScript"],
+      language: "PHP",
     },
-    {
-      name: "MoneyParts",
-      description: "Aplicación para gestión de partes monetarias",
-      link: "https://github.com/IvanAM2694/MoneyParts",
-      github: "https://github.com/IvanAM2694/MoneyParts",
-      technologies: ["C#", ".NET"],
-      language: "C#",
-    },
-    {
-      name: "Frontend-Maintenance",
-      description: "Aplicación frontend para mantenimiento de sistemas",
-      link: "https://github.com/IvanAM2694/Frontend-Maintenance",
-      github: "https://github.com/IvanAM2694/Frontend-Maintenance",
-      technologies: ["JavaScript", "React"],
-      language: "JavaScript",
-    },
-    {
-      name: "Backend-Maintenance",
-      description: "API backend para sistemas de mantenimiento",
-      link: "https://github.com/IvanAM2694/Backend-Maintenance",
-      github: "https://github.com/IvanAM2694/Backend-Maintenance",
-      technologies: ["C#", ".NET", "API"],
-      language: "C#",
-    },*/
   ],
 };

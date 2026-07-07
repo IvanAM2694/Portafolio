@@ -1,0 +1,45 @@
+---
+import csharpIcon from "../assets/icons/csharp.svg?raw";
+import { getTechIcon } from "../utils/techIcons";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const icon = getTechIcon(name);
+
+const RAW_SVG_MAP: Record<string, string> = {
+  "C#": csharpIcon,
+};
+
+const rawSvg = RAW_SVG_MAP[name];
+
+function withIconClass(svg: string): string {
+  return svg.includes('class="')
+    ? svg.replace(/class="([^"]*)"/, 'class="$1 w-10 h-10 mx-auto"')
+    : svg.replace("<svg", '<svg class="w-10 h-10 mx-auto"');
+}
+---
+
+{rawSvg ? (
+  <Fragment set:html={withIconClass(rawSvg)} />
+) : icon ? (
+  <svg
+    role="img"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-10 h-10 mx-auto"
+    aria-label={icon.title}
+  >
+    <title>{icon.title}</title>
+    <path d={icon.path} fill={`#${icon.hex}`} />
+  </svg>
+) : (
+  <span
+    class="w-10 h-10 mx-auto flex items-center justify-center rounded-md bg-ivam-border text-ivam-muted text-xs font-semibold"
+    aria-label={name}
+  >
+    ?
+  </span>
+)}

@@ -1,58 +1,67 @@
 ---
+import { Image } from "astro:assets";
 import { userData } from "../data/userData";
+import { avatarSrc } from "../utils/avatar";
+import { publicAsset } from "../utils/publicAsset";
+
+const cvFilename = "cv-ivan-aguilar.pdf";
+const cvHref = publicAsset(userData.cvPath);
 ---
 
-<section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto text-center animate-fade-in">
-    <div class="mb-8 animate-float">
-      <img 
-        src={userData.avatar} 
+<section id="home" class="scroll-mt-16 min-h-screen px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto text-center animate-fade-in pt-24 pb-20 md:pt-28 md:pb-24 md:min-h-screen md:flex md:flex-col md:justify-center">
+    <div class="mb-8 motion-safe:animate-float">
+      <Image
+        src={avatarSrc}
         alt={`Foto de ${userData.name}`}
-        class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full border-4 border-blue-500 shadow-lg shadow-blue-500/50"
+        width={160}
+        height={160}
+        widths={[112, 128, 160, 320]}
+        sizes="(max-width: 640px) 7rem, (max-width: 768px) 8rem, 10rem"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto rounded-full border-4 border-ivam-accent shadow-lg shadow-cyan-500/30 object-cover"
       />
     </div>
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent animate-slide-up">
+    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 text-gradient-heading animate-slide-up">
       {userData.name}
     </h1>
-    <p class="text-xl md:text-2xl text-gray-300 mb-6 animate-slide-up">
+    <p class="text-lg sm:text-xl md:text-2xl text-ivam-muted mb-6 animate-slide-up">
       {userData.role}
+      <span class="text-ivam-accent font-medium"> · {userData.brandName}</span>
     </p>
-    <div class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 animate-slide-up space-y-2">
-      {userData.bio.split('\n').map((paragraph) => (
+    <div class="text-base sm:text-lg text-ivam-muted max-w-2xl mx-auto mb-8 animate-slide-up space-y-2">
+      {userData.bio.split("\n").map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
-      <a 
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center w-full max-w-md sm:max-w-none mx-auto animate-slide-up">
+      <a href={cvHref} download={cvFilename} class="btn-primary w-full sm:w-auto">
+        Descargar CV
+      </a>
+      <a href="#projects" class="btn-outline w-full sm:w-auto">
+        Ver proyectos
+      </a>
+      <a
         href={userData.linkedIn}
         target="_blank"
         rel="noopener noreferrer"
-        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/50"
+        class="btn-secondary w-full sm:w-auto"
       >
         LinkedIn
       </a>
-      <a 
-        href={userData.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-all transform hover:scale-105 border border-gray-700"
-      >
-        GitHub
-      </a>
-      <a 
-        href="#contact"
-        class="px-6 py-3 bg-transparent hover:bg-gray-800 text-white rounded-lg transition-all transform hover:scale-105 border border-gray-700"
-      >
-        Contacto
-      </a>
     </div>
     <div class="mt-12 animate-slide-up">
-      <a href="#experience" class="inline-block animate-bounce">
-        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <a
+        href="#experience"
+        class="inline-flex items-center justify-center min-h-[48px] min-w-[48px] animate-bounce"
+        aria-label="Ir a experiencia laboral"
+      >
+        <svg class="w-6 h-6 text-ivam-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </a>
     </div>
   </div>
 </section>
-
