@@ -50,7 +50,8 @@ UAT sigue desplegándose en GitHub Pages; no compite con prod en buscadores.
 - [x] UAT: `noindex, follow` + canonical → prod
 - [x] `robots.txt` y `sitemap.xml` dinámicos
 - [x] React eliminado (0 KB JS cliente pesado)
-- [x] Botón Descargar CV en hero
+- [x] Botón Descargar CV en hero (CTA primario; secundario: Ver proyectos)
+- [x] Hero split: H1 `{userData.name}`, resumen `heroSummary`, avatar LCP sin regresión
 - [x] Tokens paleta IvamDEV (cyan/slate) en `base.css` + Tailwind `ivam.*`
 - [x] `prefers-reduced-motion`, skip link, aria menú móvil
 

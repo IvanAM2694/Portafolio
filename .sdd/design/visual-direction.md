@@ -46,11 +46,11 @@ Gradientes: solo en titulares de sección, cyan → blue suave (no purple).
 
 - Tech stack: SVG (Simple Icons), no emojis
 - Proyectos: cards sin link roto; badge "Próximamente" si no hay URL
-- Hero: CTA "Descargar CV" → `public/cv-ivan-aguilar.pdf`
+- **Hero (split editorial):** contenido izq. (eyebrow, saludo con nombre en acento, `heroSummary`, meta, CTAs) / avatar der. circular con borde cyan; redes bajo el marco centradas; fondo cuadriculado global en `body`
 - Timeline: una entrada Wedox (BUPLAT como contexto de producto)
 
 ## Accesibilidad
 
 - Contraste AA mínimo en texto sobre `--color-surface`
-- `prefers-reduced-motion`: desactivar float/bounce/ping
+- `prefers-reduced-motion`: desactivar animaciones de entrada prolongadas; sin float/bounce en hero
 - Focus visible en navegación y CTAs
