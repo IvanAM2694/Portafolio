@@ -20,8 +20,7 @@ export default {
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-out',
-        float: 'float 3s ease-in-out infinite',
+        'slide-up': 'slideUp 0.5s ease-out both',
       },
       keyframes: {
         fadeIn: {
@@ -31,10 +30,6 @@ export default {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
         },
       },
     },

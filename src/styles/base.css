@@ -23,6 +23,10 @@
 
   body {
     @apply bg-ivam-bg text-ivam-text antialiased overflow-x-hidden font-sans;
+    background-image:
+      linear-gradient(rgb(148 163 184 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(148 163 184 / 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
 
   h1,
@@ -79,10 +83,6 @@
   }
 
   .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: slideUp 0.5s ease-out both;
   }
 }

@@ -22,6 +22,10 @@ export interface UserData {
   name: string;
   role: string;
   bio: string;
+  heroSummary: string;
+  heroEyebrow: string;
+  yearsExperience: number;
+  heroHighlights: string[];
   location: string;
   linkedIn: string;
   github: string;
@@ -41,7 +45,12 @@ export const userData: UserData = {
     "Soy un Ingeniero Informático que disfruta transformar ideas en soluciones que ayuden a las personas.\n" +
     "En estos más de 7 años, la tecnología ha sido mi lenguaje y el liderazgo mi forma de servir: escuchar, guiar y construir junto a mi equipo.\n" +
     "Sigo buscando proyectos donde pueda aportar mi experiencia, pero también seguir aprendiendo, creciendo y dejando una huella positiva en quienes trabajan conmigo.",
-  location: "Perú",
+  heroSummary:
+    "Ingeniero Informático con más de 7 años transformando ideas en soluciones útiles con .NET, React y Azure. Combino liderazgo técnico — escuchar, guiar y construir en equipo — con productos que escalan.",
+  heroEyebrow: "Bienvenido a mi portafolio",
+  yearsExperience: 7,
+  heroHighlights: [".NET", "React", "Azure", "PostgreSQL"],
+  location: "Trujillo - Perú",
   linkedIn: "https://www.linkedin.com/in/ivan-hernan-aguilar-marinos-814771107",
   github: "https://github.com/IvanAM2694",
   technologies: [
