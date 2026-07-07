@@ -3,65 +3,94 @@ import { Image } from "astro:assets";
 import { userData } from "../data/userData";
 import { avatarSrc } from "../utils/avatar";
 import { publicAsset } from "../utils/publicAsset";
+import SocialLinks from "./SocialLinks.astro";
 
 const cvFilename = "cv-ivan-aguilar.pdf";
 const cvHref = publicAsset(userData.cvPath);
+
+const nameParts = userData.name.trim().split(/\s+/);
+const firstName = nameParts[0] ?? userData.name;
+const lastName = nameParts.slice(1).join(" ");
+
+const metaLine = [
+  `${userData.yearsExperience}+ años`,
+  userData.location,
+  ...userData.heroHighlights,
+].join(" · ");
 ---
 
-<section id="home" class="scroll-mt-16 min-h-screen px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto text-center animate-fade-in pt-24 pb-20 md:pt-28 md:pb-24 md:min-h-screen md:flex md:flex-col md:justify-center">
-    <div class="mb-8 motion-safe:animate-float">
-      <Image
-        src={avatarSrc}
-        alt={`Foto de ${userData.name}`}
-        width={160}
-        height={160}
-        widths={[112, 128, 160, 320]}
-        sizes="(max-width: 640px) 7rem, (max-width: 768px) 8rem, 10rem"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto rounded-full border-4 border-ivam-accent shadow-lg shadow-cyan-500/30 object-cover"
-      />
-    </div>
-    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 text-gradient-heading animate-slide-up">
-      {userData.name}
-    </h1>
-    <p class="text-lg sm:text-xl md:text-2xl text-ivam-muted mb-6 animate-slide-up">
-      {userData.role}
-      <span class="text-ivam-accent font-medium"> · {userData.brandName}</span>
-    </p>
-    <div class="text-base sm:text-lg text-ivam-muted max-w-2xl mx-auto mb-8 animate-slide-up space-y-2">
-      {userData.bio.split("\n").map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
-    </div>
-    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center w-full max-w-md sm:max-w-none mx-auto animate-slide-up">
-      <a href={cvHref} download={cvFilename} class="btn-primary w-full sm:w-auto">
-        Descargar CV
-      </a>
-      <a href="#projects" class="btn-outline w-full sm:w-auto">
-        Ver proyectos
-      </a>
-      <a
-        href={userData.linkedIn}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-secondary w-full sm:w-auto"
-      >
-        LinkedIn
-      </a>
-    </div>
-    <div class="mt-12 animate-slide-up">
-      <a
-        href="#experience"
-        class="inline-flex items-center justify-center min-h-[48px] min-w-[48px] animate-bounce"
-        aria-label="Ir a experiencia laboral"
-      >
-        <svg class="w-6 h-6 text-ivam-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </a>
+<section id="home" class="scroll-mt-16 relative min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12">
+  <div class="relative w-full max-w-7xl mx-auto pt-24 pb-16 md:pt-28 md:pb-20 md:min-h-screen md:flex md:flex-col md:justify-center animate-fade-in">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-12 gap-y-10 lg:gap-y-8 items-center">
+      <div class="lg:col-span-7 xl:col-span-7 order-1 text-center lg:text-left">
+        <p
+          class="text-sm sm:text-base font-medium text-ivam-accent mb-3 animate-slide-up"
+          style="animation-delay: 0.05s"
+        >
+          {userData.heroEyebrow}
+        </p>
+        <h1
+          class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight animate-slide-up"
+          style="animation-delay: 0.1s"
+        >
+          <span class="text-white">Hola, soy </span>
+          <span class="text-ivam-accent">{firstName}</span>
+          {lastName && <span class="text-white"> {lastName}</span>}
+          <span class="text-white">.</span>
+        </h1>
+        <p
+          class="text-lg sm:text-xl text-ivam-muted mb-2 animate-slide-up"
+          style="animation-delay: 0.12s"
+        >
+          {userData.role}
+          <span class="text-ivam-accent font-medium"> · {userData.brandName}</span>
+        </p>
+        <p
+          class="text-base sm:text-lg text-ivam-muted/90 mb-4 lg:max-w-xl leading-relaxed animate-slide-up"
+          style="animation-delay: 0.15s"
+        >
+          {userData.heroSummary}
+        </p>
+        <p
+          class="text-sm text-ivam-muted mb-8 animate-slide-up"
+          style="animation-delay: 0.15s"
+        >
+          {metaLine}
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-stretch sm:items-center animate-slide-up"
+          style="animation-delay: 0.2s"
+        >
+          <a href={cvHref} download={cvFilename} class="btn-primary w-full sm:w-auto">
+            Descargar CV
+          </a>
+          <a href="#projects" class="btn-outline w-full sm:w-auto gap-2">
+            Ver proyectos
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 xl:col-span-5 order-2 flex justify-center animate-slide-up" style="animation-delay: 0.1s">
+        <div class="flex flex-col items-center gap-5">
+          <Image
+            src={avatarSrc}
+            alt={`Foto de ${userData.name}`}
+            width={320}
+            height={320}
+            widths={[224, 256, 288, 320]}
+            sizes="(max-width: 640px) 14rem, (max-width: 1024px) 16rem, 18rem"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 shrink-0 rounded-full border-4 border-ivam-accent shadow-lg shadow-cyan-500/30 object-cover object-[50%_22%]"
+          />
+          <div class="flex flex-col items-center gap-3" aria-label="Redes sociales">
+            <span class="text-xs uppercase tracking-[0.2em] text-ivam-muted">Sígueme</span>
+            <SocialLinks size="md" orientation="horizontal" class="justify-center" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
