@@ -53,7 +53,7 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 min-h-[48px] inline-flex items-center justify-center bg-ivam-accent hover:bg-cyan-600 text-white rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/30;
+    @apply px-6 py-3 min-h-[48px] inline-flex items-center justify-center bg-cyan-700 hover:bg-cyan-600 text-white rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/30;
   }
 
   .btn-secondary {

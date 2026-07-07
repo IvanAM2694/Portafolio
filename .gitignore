@@ -42,3 +42,7 @@ skills-lock.json
 
 # OG generado en build (scripts/generate-og.mjs)
 src/assets/og-social.jpg
+
+# Lighthouse CI local reports
+.lighthouseci/
+/deploy.md

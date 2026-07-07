@@ -70,6 +70,13 @@ UAT sigue desplegándose en GitHub Pages; no compite con prod en buscadores.
 - [x] Covers de proyectos: **retirados** (placeholders SVG sin screenshots reales; reintroducir con WebP cuando existan capturas)
 - [x] Scroll spy en navbar (`IntersectionObserver`) + links DRY en `src/data/navSections.ts`
 - [x] Meta title prod: `Iván Aguilar — Ingeniero de Software | IvamDEV`
+- [x] Iconos tech: Simple Icons + SVG custom obligatorio si falta (regla `.cursor/rules/tech-icons.mdc`, `customTechIcons.ts`)
+
+## Fase 4 — completada
+
+- [x] Presupuesto de performance: `.sdd/specs/performance-budget.md`
+- [x] Lighthouse CI: `lighthouserc.cjs` + `.github/workflows/verify-lighthouse.yml`
+- [x] Verificación estática: `scripts/verify-static.mjs` + `npm run verify`
 
 ## Sitemap
 

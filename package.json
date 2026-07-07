@@ -15,6 +15,10 @@
     "preview": "astro preview",
     "preview:uat": "astro preview --base /Portafolio",
     "preview:prod": "cross-env ASTRO_ENV=prod PUBLIC_SITE_URL=https://ivamlabs.com PUBLIC_BASE_PATH=/ astro preview",
+    "verify:static": "node scripts/verify-static.mjs",
+    "verify:static:uat": "cross-env VERIFY_PROFILE=uat node scripts/verify-static.mjs",
+    "verify:lighthouse": "lhci autorun",
+    "verify": "npm run build:prod && npm run verify:static && npm run verify:lighthouse",
     "astro": "astro"
   },
   "dependencies": {
@@ -28,6 +32,7 @@
     "@types/node": "^24.0.0",
     "cross-env": "^7.0.3",
     "sharp": "^0.35.3",
+    "@lhci/cli": "^0.14.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.5.0"
   }

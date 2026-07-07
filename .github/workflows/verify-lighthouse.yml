@@ -1,0 +1,44 @@
+name: Verify Lighthouse
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: verify-lighthouse
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build prod (Lighthouse target)
+        run: npm run build:prod
+        env:
+          ASTRO_ENV: prod
+          PUBLIC_SITE_URL: https://ivamlabs.com
+          PUBLIC_BASE_PATH: /
+
+      - name: Static verification
+        run: npm run verify:static
+        env:
+          VERIFY_PROFILE: prod
+
+      - name: Run Lighthouse CI
+        run: npm run verify:lighthouse

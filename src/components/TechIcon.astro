@@ -21,7 +21,10 @@ const icon = getTechIcon(name);
     <path d={icon.path} fill={`#${icon.hex}`} />
   </svg>
 ) : (
-  <span class="w-10 h-10 mx-auto flex items-center justify-center text-ivam-muted text-sm font-semibold" aria-hidden="true">
+  <span
+    class="w-10 h-10 mx-auto flex items-center justify-center rounded-md bg-ivam-border text-ivam-muted text-xs font-semibold"
+    aria-label={name}
+  >
     ?
   </span>
 )}

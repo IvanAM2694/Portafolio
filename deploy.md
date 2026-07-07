@@ -122,3 +122,4 @@ Logs locales: `.vps/logs/deploy-prod-prod.log`
 | 2026-07-06 | prod | CI GitHub Actions + rsync SSH | Reemplaza deploy manual habitual |
 | 2026-07-06 | prod | Fase 2 performance | Avatar local + Astro Image; plantilla Nginx cache `deploy/nginx/` |
 | 2026-07-06 | prod | Nginx cache aplicado | `deploy-prod.py --setup-only`; HTTPS OK; headers verificados |
+| 2026-07-06 | prod | Fase 4 Verify | Lighthouse CI en `main` (build prod); `npm run verify` local |
