@@ -21,6 +21,9 @@
 |----------|----------|--------|--------|
 | VetERP | Pendiente | Pendiente | Mostrar sin links externos |
 | Peru Ancestral | Pendiente | Pendiente | Mostrar sin links externos |
+| Centro Neurológico Integral | https://centroneurologicointegral.com/ | — | Sitio público (Astro) |
+
+Orden de secciones en la landing: Inicio, Experiencia, Proyectos, Tecnologías, Contacto.
 
 Proyectos C# históricos: **eliminados** del dataset (no comentados).
 
@@ -68,7 +71,7 @@ UAT sigue desplegándose en GitHub Pages; no compite con prod en buscadores.
 - [x] Tipografías self-hosted: **Outfit** (display) + **Source Sans 3** (cuerpo) vía `@fontsource`
 - [x] OG image **1200×630** generada en build (`scripts/generate-og.mjs` → `src/assets/og-social.jpg`)
 - [x] Meta `og:image:width/height/alt`; JSON-LD Person sigue con foto (avatar); OG social con tarjeta dedicada
-- [x] Covers de proyectos: **retirados** (placeholders SVG sin screenshots reales; reintroducir con WebP cuando existan capturas)
+- [x] Covers de proyectos: galería WebP real (VetERP producción y Centro Neurológico). Se abre con el botón Galería. Peru Ancestral sigue sin capturas.
 - [x] Scroll spy en navbar (`IntersectionObserver`) + links DRY en `src/data/navSections.ts`
 - [x] Meta title prod: `Iván Aguilar — Ingeniero de Software | IvamDEV`
 - [x] Iconos tech: Simple Icons + SVG custom obligatorio si falta (regla `.cursor/rules/tech-icons.mdc`, `customTechIcons.ts`)
