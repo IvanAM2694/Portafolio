@@ -1,8 +1,8 @@
 export const navSections = [
   { id: "home", label: "Inicio" },
   { id: "experience", label: "Experiencia" },
-  { id: "technologies", label: "Tecnologías" },
   { id: "projects", label: "Proyectos" },
+  { id: "technologies", label: "Tecnologías" },
   { id: "contact", label: "Contacto" },
 ] as const;
 

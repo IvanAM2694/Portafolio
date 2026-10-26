@@ -8,6 +8,12 @@ export interface Experience {
   location?: string;
 }
 
+export interface ProjectGalleryImage {
+  /** Archivo en src/assets/projects */
+  file: string;
+  alt: string;
+}
+
 export interface Project {
   name: string;
   description: string;
@@ -15,6 +21,7 @@ export interface Project {
   github?: string;
   technologies: string[];
   language?: string;
+  gallery?: ProjectGalleryImage[];
 }
 
 export interface UserData {
@@ -132,17 +139,108 @@ export const userData: UserData = {
   projects: [
     {
       name: "VetERP",
-      description:
-        "Sistema de gestión para consultorio veterinario. Laravel + React + TypeScript.",
+      description: "Sistema de gestión para consultorio veterinario.",
       technologies: ["PHP", "Laravel", "React", "TailwindCSS", "TypeScript"],
       language: "PHP",
+      gallery: [
+        {
+          file: "veterp-inicio.webp",
+          alt: "Panel de control de VetERP, con acciones rápidas y el resumen del día.",
+        },
+        {
+          file: "veterp-pacientes.webp",
+          alt: "Listado de pacientes de VetERP, con especie, raza y propietario.",
+        },
+        {
+          file: "veterp-citas.webp",
+          alt: "Agenda de citas de VetERP en vista de calendario.",
+        },
+        {
+          file: "veterp-historias.webp",
+          alt: "Historias clínicas de VetERP, con código, paciente y fecha de admisión.",
+        },
+        {
+          file: "veterp-atenciones.webp",
+          alt: "Cola de atenciones veterinarias de VetERP, filtrada por fecha y estado.",
+        },
+        {
+          file: "veterp-veterinarios.webp",
+          alt: "Maestro de veterinarios de VetERP, con colegiatura y especialidad.",
+        },
+        {
+          file: "veterp-spa.webp",
+          alt: "Servicios de spa de VetERP: baño, corte y desmotado.",
+        },
+        {
+          file: "veterp-examenes.webp",
+          alt: "Catálogo de exámenes médicos de VetERP.",
+        },
+        {
+          file: "veterp-especies.webp",
+          alt: "Especies atendidas en VetERP, con abreviatura y correlativo.",
+        },
+        {
+          file: "veterp-configuracion.webp",
+          alt: "Configuración general del consultorio en VetERP: identidad, colores y logo.",
+        },
+      ],
     },
     {
       name: "Peru Ancestral",
       description:
-        "Plataforma de turismo ancestral en Perú con reserva de tours y hoteles e integración de pagos IzyPay. Laravel + React.",
+        "Plataforma de turismo ancestral en Perú con reserva de tours y hoteles e integración de pagos IzyPay.",
       technologies: ["PHP", "Laravel", "React", "TailwindCSS", "TypeScript"],
       language: "PHP",
+    },
+    {
+      name: "Centro Neurológico Integral",
+      description:
+        "Sitio web del centro médico en Magdalena del Mar: especialidades, procedimientos y equipo.",
+      link: "https://centroneurologicointegral.com/",
+      technologies: ["Astro"],
+      language: "Astro",
+      gallery: [
+        {
+          file: "cni-inicio.webp",
+          alt: "Inicio del Centro Neurológico Integral, con el mensaje de especialistas en neurología para niños y adultos.",
+        },
+        {
+          file: "cni-nosotros.webp",
+          alt: "Sección institucional: experiencia clínica e innovación tecnológica en Magdalena.",
+        },
+        {
+          file: "cni-especialidades.webp",
+          alt: "Especialidades del centro: neurología, neuropediatría, cardiología, medicina física, psicología y psiquiatría.",
+        },
+        {
+          file: "cni-procedimientos.webp",
+          alt: "Procedimientos del centro y formulario para reservar una consulta.",
+        },
+        {
+          file: "cni-doctores.webp",
+          alt: "Equipo médico del inicio: neurólogos con opción de reservar cita.",
+        },
+        {
+          file: "cni-blog.webp",
+          alt: "Bloque de enfermedades neurológicas: ACV, demencia por Alzheimer y migraña.",
+        },
+        {
+          file: "cni-neurologia.webp",
+          alt: "Página de neurología: clínica neurológica especializada en Lima.",
+        },
+        {
+          file: "cni-neurologia-servicios.webp",
+          alt: "Exámenes diagnósticos de neurología: electromiografía, electroencefalograma y potenciales evocados.",
+        },
+        {
+          file: "cni-neurologia-equipo.webp",
+          alt: "Staff médico de neurología, con colegiatura y botón para reservar cita.",
+        },
+        {
+          file: "cni-neuropediatria.webp",
+          alt: "Página de neuropediatría: diagnóstico y tratamiento en neurología pediátrica.",
+        },
+      ],
     },
   ],
 };
